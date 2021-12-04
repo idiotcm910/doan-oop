@@ -25,9 +25,18 @@ public class FastFood extends Product implements IFile
      
     @Override
     public boolean contains(String s) {
-        return this.maSanPham.equals(s) || this.tenSanPham.equals(s) || Integer.toString(this.giaSanPham).equals(s) || this.hamLuongDinhDuong.equals(s);
-    }
-     
+		if(this.maSanPham.equals(s)) { return true; }
+
+		if(this.tenSanPham.equals(s)) { return true; }
+
+		String giaSanPhamToString = Integer.toString(this.giaSanPham);
+		if(giaSanPhamToString.equals(s)) { return true; }
+
+		if(this.hamLuongDinhDuong.equals(s)) { return true; }
+
+		return false;
+	}
+
     @Override
     public String xuatThongTin() {
         return String.format("%-10s%-25s%-11s%-16s%-15s", this.maSanPham, this.tenSanPham, this.giaSanPham, this.hamLuongDinhDuong, this.ngayNhapThongTin);
@@ -35,9 +44,18 @@ public class FastFood extends Product implements IFile
      
     @Override
     public boolean equals(Object o) {
-        FastFood fastFood = (FastFood)o;
-        return fastFood.getMaSanPham() == this.maSanPham && fastFood.getTenSanPham() == this.tenSanPham && fastFood.getGiaSanPham() == this.giaSanPham && fastFood.getHamLuongDinhDuong() == this.hamLuongDinhDuong;
-    }
+        FastFood ff = (FastFood)o;
+
+		if(this.maSanPham.equals(ff.getMaSanPham())) { return false; }
+
+		if(this.tenSanPham.equals(ff.getTenSanPham())) { return false; }
+
+		if(this.giaSanPham == ff.getGiaSanPham()) { return false; }
+
+		if(this.hamLuongDinhDuong.equals(ff.getHamLuongDinhDuong())) { return false; }
+
+		return true;
+	}
      
     @Override
     public void readDataInDatabase(String str) {

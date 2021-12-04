@@ -31,15 +31,33 @@ public class Drinks extends Product implements IFile
      
     @Override
     public boolean contains(String s) {
-        return this.maSanPham == s || this.tenSanPham == s || Integer.toString(this.giaSanPham) == s || this.dungTich == s;
-    }
+		if(this.maSanPham.equals(s)) { return true; }
+
+		if(this.tenSanPham.equals(s)) { return true; }
+
+		String giaSanPhamToString = Integer.toString(this.giaSanPham);
+		if(giaSanPhamToString.equals(s)) { return true; }
+
+		if(this.dungTich.equals(s)) { return true; }
+
+		return false;
+	}
     
     @Override
     public boolean equals(Object o) {
-        Drinks drinks = (Drinks)o;
-        return drinks.getMaSanPham() == this.maSanPham && drinks.getTenSanPham() == this.tenSanPham && drinks.getGiaSanPham() == this.giaSanPham && drinks.getDungTich() == this.dungTich;
-    }
-     
+        Drinks ff = (Drinks)o;
+
+		if(this.maSanPham.equals(ff.getMaSanPham())) { return false; }
+
+		if(this.tenSanPham.equals(ff.getTenSanPham())) { return false; }
+
+		if(this.giaSanPham == ff.getGiaSanPham()) { return false; }
+
+		if(this.dungTich.equals(ff.getDungTich())) { return false; }
+
+		return true;
+	}
+    
     @Override
     public void readDataInDatabase(String str) {
         StringTokenizer stringTokenizer = new StringTokenizer(str, ";");

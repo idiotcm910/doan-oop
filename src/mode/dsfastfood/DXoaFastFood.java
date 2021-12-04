@@ -51,13 +51,13 @@ public class DXoaFastFood implements IHienThi {
     }
 
     private void xuLyMaSanPham(String str) {
-        FastFood ffRemove = (FastFood)this.list.findElement(str); 
+        int indexOfProductRemoved = this.list.indexOf(str);
 
-        if(ffRemove == null) {
+        if(indexOfProductRemoved == -1) {
             throw new InputException("Ma san pham ban nhap khong tim thay!!!");
         }
         
-        this.list.remove(ffRemove);
+        this.list.remove(indexOfProductRemoved);
 
         DataBase dbFile = new DataBase("fastfood");
         dbFile.update(this.list.writeListDataInDatabase());
