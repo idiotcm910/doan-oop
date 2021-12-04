@@ -3,6 +3,8 @@ package products;
 import utils.DateIn;
 import java.util.Scanner;
 
+import lib.InputException;
+
 abstract class Product
 {
     protected String maSanPham;
@@ -11,13 +13,28 @@ abstract class Product
     protected int giaSanPham;
     
     public void nhap() {
-        Scanner scanner = new Scanner(System.in);
+        Scanner ip = new Scanner(System.in);
         System.out.print("Nhap ma san pham: ");
-        this.maSanPham = scanner.nextLine();
+
+        this.maSanPham = ip.nextLine().trim();
+		if(this.maSanPham.isEmpty()) {
+			throw new InputException("Ma san pham khong duoc bo trong!!!");
+		}
+
         System.out.print("Nhap ten san pham: ");
-        this.tenSanPham = scanner.nextLine();
+        this.tenSanPham = ip.nextLine().trim();
+		if(this.tenSanPham.isEmpty()) {
+			throw new InputException("Ten san pham khong duoc bo trong!!!");
+		}
+
         System.out.print("Nhap gia: ");
-        this.giaSanPham = Integer.parseInt(scanner.nextLine());
+		try {
+        	this.giaSanPham = Integer.parseInt(ip.nextLine());
+		}
+		catch(Exception ex) {
+			throw new InputException("du lieu nhap phai la so!!");
+		}
+
         this.ngayNhapThongTin = DateIn.getCurrentDate();
     }
     

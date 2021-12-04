@@ -3,6 +3,7 @@ package products;
 import java.util.StringTokenizer;
 import java.util.Scanner;
 import lib.IFile;
+import lib.InputException;
 
 public class FastFood extends Product implements IFile
 {
@@ -10,9 +11,13 @@ public class FastFood extends Product implements IFile
     
     public void nhap() {
         super.nhap();
-        Scanner scanner = new Scanner(System.in);
+        Scanner ip = new Scanner(System.in);
+
         System.out.print("Nhap ham luong dinh duong: ");
-        this.hamLuongDinhDuong = scanner.nextLine();
+        this.hamLuongDinhDuong = ip.nextLine().trim();
+		if(this.hamLuongDinhDuong.isEmpty()) {
+			throw new InputException("Ham luong dinh duong khong duoc bo trong!!!");
+		}
     }
     
     public String getHamLuongDinhDuong() {

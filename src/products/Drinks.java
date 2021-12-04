@@ -3,6 +3,7 @@ package products;
 import java.util.StringTokenizer;
 import java.util.Scanner;
 import lib.IFile;
+import lib.InputException;
 
 public class Drinks extends Product implements IFile
 {
@@ -18,10 +19,13 @@ public class Drinks extends Product implements IFile
 
     public void nhap() {
         super.nhap();
-        Scanner scanner = new Scanner(System.in);
+        Scanner ip = new Scanner(System.in);
+
         System.out.print("Nhap dung tich: ");
-        this.dungTich = scanner.nextLine();
-        scanner.close();
+        this.dungTich = ip.nextLine().trim();
+		if(this.dungTich.isEmpty()) {
+			throw new InputException("Dung tich khong duoc bo trong!!!");
+		}
     }
    
     @Override

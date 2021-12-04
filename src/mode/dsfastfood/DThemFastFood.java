@@ -59,8 +59,14 @@ public class DThemFastFood implements IHienThi {
         for(int i = 1; i <= n; ++i) {
             FastFood ff = new FastFood();
             System.out.println("====================Nhap thong tin san pham thu " + i + "==================");
-            ff.nhap();
-            listEl.addElement(ff);
+			try {
+				ff.nhap();
+	            listEl.addElement(ff);
+			}
+			catch(InputException ex) {
+				System.out.println(ex.getMessage());
+				i -= 1;
+			}
         }
 
         DataBase dbFile = new DataBase("fastfood");
