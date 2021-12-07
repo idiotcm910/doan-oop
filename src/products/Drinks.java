@@ -30,7 +30,7 @@ public class Drinks extends Product implements IFile
    
     @Override
     public String xuatThongTin() {
-        return String.format("%-10s%-25s%-16s%-16s%-29s", this.maSanPham, this.tenSanPham, this.giaSanPham, this.dungTich, this.ngayNhapThongTin);
+        return String.format("%-10s%-25s%-11s%-16s%-25s", this.maSanPham, this.tenSanPham, this.giaSanPham, this.dungTich, this.ngayNhapThongTin);
     }
      
     @Override

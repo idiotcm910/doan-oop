@@ -3,6 +3,7 @@ package products;
 import java.util.ArrayList;
 import lib.IFile;
 import lib.IListFile;
+import utils.DisplayFormat;
 import utils.List;
 
 public class ListProduct extends List implements IListFile {
@@ -29,9 +30,19 @@ public class ListProduct extends List implements IListFile {
 
    	@Override
    	public void xuatDanhSachThongTin() {
+		System.out.println(DisplayFormat.inRaHangCungKyTu(DisplayFormat.getWidthDisplay(), '='));
+	    System.out.printf("%-5s%-8s%-10s%-25s%-11s%-16s%-25s%-16s%5s\n",
+			" ", "STT", "MaSP", "Ten San Pham", "gia", "hldd", "ngay nhap", "Loai san pham", " ");
+		System.out.println(DisplayFormat.inRaHangCungKyTu(DisplayFormat.getWidthDisplay(), '='));
+
       	for(int i = 0; i < this.listElement.size(); ++i) {
-         	System.out.printf("%5s%-8s%s%5s\n", " ", i + 1, this.listElement.get(i).xuatThongTin(), " ");
+			Product el = this.listElement.get(i);
+			String xuatLoaiSanPham = (el.getClass().getSimpleName().equals("FastFood")) ? "Thuc an nhanh" : "Thuc uong";
+
+         	System.out.printf("%5s%-8s%s%-16s%5s\n", " ", i + 1, this.listElement.get(i).xuatThongTin(), xuatLoaiSanPham, " ");
       	}
+		
+		System.out.println(DisplayFormat.inRaHangCungKyTu(DisplayFormat.getWidthDisplay(), '='));
    	}
 
    	@Override

@@ -1,11 +1,12 @@
 package products;
 
 import utils.DateIn;
+import utils.Validation;
 import java.util.Scanner;
 
 import lib.InputException;
 
-abstract class Product
+abstract public class Product
 {
     protected String maSanPham;
     protected String tenSanPham;
@@ -16,24 +17,18 @@ abstract class Product
         Scanner ip = new Scanner(System.in);
         System.out.print("Nhap ma san pham: ");
 
-        this.maSanPham = ip.nextLine().trim();
-		if(this.maSanPham.isEmpty()) {
-			throw new InputException("Ma san pham khong duoc bo trong!!!");
+        this.maSanPham = Validation.nhapDulieu();
+
+		// Kiểm trả mã sản phẩm chỉ tối đa 4 ký tự
+		if(this.maSanPham.length() > 4) {
+			throw new InputException("Ma san pham chi duoc nhap toi da 4 ki tu!!!");
 		}
 
         System.out.print("Nhap ten san pham: ");
-        this.tenSanPham = ip.nextLine().trim();
-		if(this.tenSanPham.isEmpty()) {
-			throw new InputException("Ten san pham khong duoc bo trong!!!");
-		}
+		this.tenSanPham = Validation.nhapDulieu();
 
         System.out.print("Nhap gia: ");
-		try {
-        	this.giaSanPham = Integer.parseInt(ip.nextLine());
-		}
-		catch(Exception ex) {
-			throw new InputException("du lieu nhap phai la so!!");
-		}
+		this.giaSanPham = Validation.nhapDuLieuSo();
 
         this.ngayNhapThongTin = DateIn.getCurrentDate();
     }

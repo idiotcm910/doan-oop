@@ -4,6 +4,7 @@ import java.util.StringTokenizer;
 import java.util.Scanner;
 import lib.IFile;
 import lib.InputException;
+import utils.Validation;
 
 public class FastFood extends Product implements IFile
 {
@@ -14,10 +15,7 @@ public class FastFood extends Product implements IFile
         Scanner ip = new Scanner(System.in);
 
         System.out.print("Nhap ham luong dinh duong: ");
-        this.hamLuongDinhDuong = ip.nextLine().trim();
-		if(this.hamLuongDinhDuong.isEmpty()) {
-			throw new InputException("Ham luong dinh duong khong duoc bo trong!!!");
-		}
+		this.hamLuongDinhDuong = Validation.nhapDulieu();
     }
     
     public String getHamLuongDinhDuong() {
@@ -44,20 +42,19 @@ public class FastFood extends Product implements IFile
 
     @Override
     public String xuatThongTin() {
-        return String.format("%-10s%-25s%-11s%-16s%-15s", this.maSanPham, this.tenSanPham, this.giaSanPham, this.hamLuongDinhDuong, this.ngayNhapThongTin);
+        return String.format("%-10s%-25s%-11s%-16s%-25s", this.maSanPham, this.tenSanPham, this.giaSanPham, this.hamLuongDinhDuong, this.ngayNhapThongTin);
     }
      
     @Override
     public boolean equals(Object o) {
         FastFood ff = (FastFood)o;
+		if(!this.maSanPham.equals(ff.getMaSanPham())) { return false; }
 
-		if(this.maSanPham.equals(ff.getMaSanPham())) { return false; }
+		if(!this.tenSanPham.equals(ff.getTenSanPham())) { return false; }
 
-		if(this.tenSanPham.equals(ff.getTenSanPham())) { return false; }
+		if(this.giaSanPham != ff.getGiaSanPham()) { return false; }
 
-		if(this.giaSanPham == ff.getGiaSanPham()) { return false; }
-
-		if(this.hamLuongDinhDuong.equals(ff.getHamLuongDinhDuong())) { return false; }
+		if(!this.hamLuongDinhDuong.equals(ff.getHamLuongDinhDuong())) { return false; }
 
 		return true;
 	}
