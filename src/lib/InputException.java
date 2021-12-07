@@ -2,7 +2,7 @@ package lib;
 
 public class InputException extends RuntimeException
 {
-    public InputException(final String message) {
+    public InputException(String message) {
         super(message);
     }
 }

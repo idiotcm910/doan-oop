@@ -2,7 +2,7 @@ package lib;
 
 public interface IFile
 {
-    void readDataInDatabase(final String p0);
+    void readDataInDatabase(String data);
     
     String writeDataInDatabase();
 }
