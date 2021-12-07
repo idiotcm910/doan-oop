@@ -1,17 +1,20 @@
 package mode;
 
-import utils.Display;
-import lib.InputException;
-import java.util.Scanner;
-import utils.DisplayFormat;
 import lib.IHienThi;
+import lib.InputException;
+import utils.DisplayFormat;
+import utils.Validation;
+import utils.Display;
+import java.util.Scanner;
+
+import mode.menuproduct.DMenuProduct;
 
 public class DMenu implements IHienThi
 {
     @Override
     public void xuatTitle() {
-        System.out.println(DisplayFormat.inRaChuNamGiua(105, "ME.NU", '='));
-        System.out.printf("\n\n", new Object[0]);
+        System.out.println(DisplayFormat.inRaChuNamGiua(DisplayFormat.getWidthDisplay(), "ME.NU", '='));
+        System.out.printf("\n\n");
     }
     
     @Override
@@ -32,12 +35,8 @@ public class DMenu implements IHienThi
         Scanner ip = new Scanner(System.in);
         System.out.print("Nhap lua chon: ");
         int choice;
-        try {
-            choice = Integer.parseInt(ip.nextLine());
-        }
-        catch (Exception ex) {
-            throw new InputException("Vui long nhap lua chon la so!!!");
-        }
+		choice = Validation.nhapDuLieuSo();
+
         return choice;
     }
     
@@ -45,7 +44,7 @@ public class DMenu implements IHienThi
         Display dp = Display.getInstance();
         switch (n) {
             case 1: 
-                dp.hienThi((IHienThi)new DMenuDSSP());
+                dp.hienThi(new DMenuProduct());
                 break;
             case 0: 
                 Runtime.getRuntime().exit(0);

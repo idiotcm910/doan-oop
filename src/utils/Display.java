@@ -6,7 +6,7 @@ import lib.IHienThi;
 
 public class Display
 {
-    private static Display instance;
+    private static Display instance = null;
     private IHienThi dHeader;
     
     private Display() {
@@ -36,21 +36,19 @@ public class Display
     }
     
     public void hienThi(IHienThi hienThi) {
-        try {
-            this.xoaManHinh();
-            if (this.dHeader != null) {
-                this.dHeader.xuat();
-            }
-            hienThi.xuatTitle();
-            hienThi.xuat();
-        }
-        catch (InputException ex) {
-            this.xuLyLoi(ex.getMessage());
-            this.hienThi(hienThi);
-        }
-    }
-    
-    static {
-        Display.instance = null;
-    }
+		while(true) {
+	        try {
+	            this.xoaManHinh();
+    	        if (this.dHeader != null) {
+        	        this.dHeader.xuat();
+            	}
+            	hienThi.xuatTitle();
+            	hienThi.xuat();
+        	}
+        	catch (InputException ex) {
+            	this.xuLyLoi(ex.getMessage());
+        	}
+    	}
+	}
+
 }
