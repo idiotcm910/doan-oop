@@ -5,6 +5,7 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
+import java.util.Base64;
 
 public class DataBase {
    private String pathCollection;
@@ -22,7 +23,9 @@ public class DataBase {
 
          String data;
          while((data = br.readLine()) != null) {
-            collection.add(data);
+			byte[] decodedArr = Base64.getDecoder().decode(data);
+			String decodedData = new String(decodedArr);
+            collection.add(decodedData);
          }
 
          br.close();
@@ -39,14 +42,14 @@ public class DataBase {
          BufferedWriter bw = new BufferedWriter(fw);
         
          for(String data : collection) {
-            bw.write(data);
+			String encodedData = Base64.getEncoder().encodeToString(data.getBytes());
+            bw.write(encodedData);
             bw.newLine();
          }
          bw.close();
       } catch (Exception ex) {
          ex.printStackTrace();
       }
-
    }
 }
 
