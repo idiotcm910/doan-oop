@@ -1,28 +1,29 @@
-package mode.dsfastfood;
+package mode.menuproduct;
 
 import lib.IHienThi;
 import lib.InputException;
 import products.ListProduct;
 import utils.Display;
 import utils.DisplayFormat;
+import utils.Validation;
 
 import java.util.Scanner;
 
-import mode.DMenuDSSP;
+import mode.DMenu;
 
 import db.*;
 
-public class DMenuDSFF implements IHienThi {
+public class DMenuProduct implements IHienThi {
     private ListProduct list;
-    public DMenuDSFF() {
+    public DMenuProduct() {
         list = new ListProduct();
-        DataBase dbFile = new DataBase("fastfood");
+        DataBase dbFile = new DataBase("product");
         list.readListDataInDatabase(dbFile.find());
     }
 
     @Override
     public void xuatTitle() {
-        System.out.println(DisplayFormat.inRaChuNamGiua(105, "DANH SACH THUC AN NHANH", '='));
+        System.out.println(DisplayFormat.inRaChuNamGiua(DisplayFormat.getWidthDisplay(), "DANH SACH SAN PHAM", '='));
         System.out.printf("\n\n");
     }
 
@@ -38,34 +39,25 @@ public class DMenuDSFF implements IHienThi {
     }
 
     private void noiDungMenu() {
-    	System.out.println(String.format("%-105s", "=").replaceAll(" ", "="));   
-	    System.out.printf("%-5s%-8s%-10s%-25s%-11s%-16s%-15s%5s\n",
-			" ", "STT", "MaSP", "Ten San Pham", "gia", "hldd", "ngay nhap", " ");
-		System.out.println(String.format("%-105s", "-").replaceAll(" ", "-"));   
-
         this.list.xuatDanhSachThongTin();
-        System.out.println(String.format("%-105s", "=").replaceAll(" ", "="));   
+		System.out.printf("\n\n");
     }
 
     private void danhSachLuaChon() {
-        System.out.printf("\n\n");
         System.out.println("1. Them san pham");
         System.out.println("2. Chinh sua thong tin san pham");
         System.out.println("3. Xoa san pham");
-        System.out.println("4. Quay lai Menu san pham");
+        System.out.println("4. Quay lai menu chinh");
         System.out.println("0. Thoat chuong trinh");
         System.out.print("Nhap lua chon: ");
     }
     
     private int nhapLuaChon() {
         Scanner ip = new Scanner(System.in);
+
         int choice = 0;
-        try {
-            choice = Integer.parseInt(ip.nextLine());
-        }
-        catch(Exception e) {
-            throw new InputException("Vui long nhap lua chon bang so!!!");
-        }
+		choice = Validation.nhapDuLieuSo();
+
         return choice;
     }
 
@@ -73,16 +65,17 @@ public class DMenuDSFF implements IHienThi {
         Display dp = Display.getInstance();
         switch(choice) {
 			case 1:
-                dp.hienThi(new DThemFastFood(this.list));
+                dp.hienThi(new DThemProduct(this.list));
 				break;
             case 2:
+				dp.hienThi(new DSuaProduct(this.list));
                 break;
             case 3:
-                dp.hienThi(new DXoaFastFood(this.list));
+                dp.hienThi(new DXoaProduct(this.list));
                 break;
-            case 4:
-                dp.hienThi(new DMenuDSSP());
-                break;
+			case 4:
+				dp.hienThi(new DMenu());
+				break;
 			case 0:
 				// thoat chuong trinh
 				Runtime.getRuntime().exit(0);

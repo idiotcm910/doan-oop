@@ -1,4 +1,4 @@
-package mode.dsfastfood;
+package mode.menuproduct;
 
 import products.ListProduct;
 import products.FastFood;
@@ -10,35 +10,30 @@ import lib.InputException;
 import utils.Display;
 import utils.DisplayFormat;
 
-public class DXoaFastFood implements IHienThi {
+public class DXoaProduct implements IHienThi {
     private ListProduct list;
-    public DXoaFastFood(ListProduct list) {
+    public DXoaProduct(ListProduct list) {
         this.list = list;
     }
 
     @Override
     public void xuatTitle() {
-        System.out.println(DisplayFormat.inRaChuNamGiua(105, "XOA SAN PHAM THUC AN NHANH", '='));
+        System.out.println(DisplayFormat.inRaChuNamGiua(DisplayFormat.getWidthDisplay(), "XOA SAN PHAM", '='));
         System.out.printf("\n\n");
     }
 
     @Override
     public void xuat() {
-        this.danhSachThucAnNhanh();
+        this.danhSachSanPham();
 
         String maSanPhamCanXoa = this.nhapMaSanPhamCanXoa();
 
         xuLyMaSanPham(maSanPhamCanXoa);
     }
 
-    private void danhSachThucAnNhanh() {
-    	System.out.println(String.format("%-105s", "=").replaceAll(" ", "="));   
-	    System.out.printf("%-5s%-8s%-10s%-25s%-11s%-16s%-15s%5s\n",
-			" ", "STT", "MaSP", "Ten San Pham", "gia", "hldd", "ngay nhap", " ");
-		System.out.println(String.format("%-105s", "-").replaceAll(" ", "-"));   
-
+    private void danhSachSanPham() {
         this.list.xuatDanhSachThongTin();
-        System.out.println(String.format("%-105s", "=").replaceAll(" ", "="));   
+		System.out.print("\n\n");
     }
 
     private String nhapMaSanPhamCanXoa() {
@@ -59,7 +54,7 @@ public class DXoaFastFood implements IHienThi {
         
         this.list.remove(indexOfProductRemoved);
 
-        DataBase dbFile = new DataBase("fastfood");
+        DataBase dbFile = new DataBase("product");
         dbFile.update(this.list.writeListDataInDatabase());
 
         Scanner ip = new Scanner(System.in);
@@ -67,6 +62,6 @@ public class DXoaFastFood implements IHienThi {
         System.out.println("Xoa san pham thanh cong!");
         System.out.println("Nhan nut bat ky de tiep tuc.");
         ip.nextLine();
-        dp.hienThi(new DMenuDSFF());
+        dp.hienThi(new DMenuProduct());
     }
 }
