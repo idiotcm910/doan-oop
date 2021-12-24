@@ -1,7 +1,8 @@
-package mode.menuproduct;
+package menu.menuproduct;
 
-import products.ListProduct;
-import products.FastFood;
+import components.products.ListProduct;
+import components.products.Product;
+
 import java.util.Scanner;
 
 import db.DataBase;
@@ -9,6 +10,7 @@ import lib.IHienThi;
 import lib.InputException;
 import utils.Display;
 import utils.DisplayFormat;
+import utils.Validation;
 
 public class DXoaProduct implements IHienThi {
     private ListProduct list;
@@ -18,7 +20,7 @@ public class DXoaProduct implements IHienThi {
 
     @Override
     public void xuatTitle() {
-        System.out.println(DisplayFormat.inRaChuNamGiua(DisplayFormat.getWidthDisplay(), "XOA SAN PHAM", '='));
+        System.out.println(DisplayFormat.inRaChuNamGiua(DisplayFormat.widthDisplay, "XOA SAN PHAM", '='));
         System.out.printf("\n\n");
     }
 
@@ -37,11 +39,9 @@ public class DXoaProduct implements IHienThi {
     }
 
     private String nhapMaSanPhamCanXoa() {
-        Scanner ip = new Scanner(System.in);
         String str;
         System.out.print("Nhap ma san pham can xoa: ");
-        str = ip.nextLine();
-
+		str = Validation.nhapDuLieu(Product.gioiHanDoDaiMaSanPham);
         return str;
     }
 
@@ -51,17 +51,21 @@ public class DXoaProduct implements IHienThi {
         if(indexOfProductRemoved == -1) {
             throw new InputException("Ma san pham ban nhap khong tim thay!!!");
         }
-        
-        this.list.remove(indexOfProductRemoved);
+
+ 		String tenSanPham = this.list.getElement(indexOfProductRemoved).getTenSanPham();
+       
+        this.list.removeElement(indexOfProductRemoved);
 
         DataBase dbFile = new DataBase("product");
         dbFile.update(this.list.writeListDataInDatabase());
 
-        Scanner ip = new Scanner(System.in);
+		// Xóa các dữ liệu của sản phẩm này bên file dữ liệu combo sản phẩm
+		DataBase dbFileCombo = new DataBase("comboproduct");
+		dbFileCombo.findAndDelete(tenSanPham);
+		
         Display dp = Display.getInstance();
         System.out.println("Xoa san pham thanh cong!");
-        System.out.println("Nhan nut bat ky de tiep tuc.");
-        ip.nextLine();
+		DisplayFormat.dungChuongTrinh();
         dp.hienThi(new DMenuProduct());
     }
 }

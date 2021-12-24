@@ -7,25 +7,25 @@ public class Validation {
 	private static Scanner ip = new Scanner(System.in);
 	
 	/**
-	 *	Xử lý việc người dùng nhập cho trường dữ liệu số là chữ
+	 *	Xử lý việc người dùng nhập không phải là số và bỏ trống không nhập
 	 */
 	public static int nhapDuLieuSo() {
-		int choice;
+		int input;
 
 		try {
-			choice = Integer.parseInt(ip.nextLine());
+			input = Integer.parseInt(ip.nextLine());
 		}
 		catch(RuntimeException ex) {
 			throw new InputException("Ban vui long nhap du lieu la so!!!");
 		}
 
-		return choice;
+		return input;
 	}
 
 	/**
 	 *	xử lý việc người dùng nhập trống dữ liệu
 	 * */
-	public static String nhapDulieu() {
+	public static String nhapDuLieu() {
 		String input = ip.nextLine().trim();
 		
 		if(input.isEmpty()) {
@@ -34,4 +34,55 @@ public class Validation {
 
 		return input;
 	}
+
+	/**
+	 * Xử lý việc người dùng nhập trống dữ liệu và đồ dài dữ liệu vượt quá giới hạn
+	 * @param maxLength: độ dài tối đa của chuỗi dữ liệu nhập vào
+	 * @return String
+	 * */
+	public static String nhapDuLieu(int maxLength) {
+		String input = Validation.nhapDuLieu();
+
+		if(input.length() > maxLength) {
+			throw new InputException("Du lieu nhap khong vuot qua " + maxLength + " ki tu!!!");
+		}
+
+		return input;
+	}
+	/**
+	 * Xu ly viec nguoi dung nhap khong phai la so thuc
+	 * */
+	public static Double nhapDuLieuSoThuc() {
+		Double input = 0.0;
+
+		try {
+			input = Double.parseDouble(ip.nextLine());
+		}
+		catch(Exception ex) {
+			throw new InputException("Ban vui long nhap du lieu la so!!!");
+		}
+
+		if(input < 0) {
+			throw new InputException("Ban vui long nhap so lon hon 0!!!");
+		}
+
+		return input;
+	}
+
+	/**
+	 * Xử lý việc người dùng nhập trống dữ liệu và dữ liệu vượt quá phạm vị đối số truyền vào 
+	 * @param max: Số giới hạn tối đa
+	 * @param min: số giới hạn tối thiểu
+	 * @return int
+	 * */
+	public static int nhapDuLieuSo(int min, int max) {
+		int input = Validation.nhapDuLieuSo();
+
+		if(input < min || input > max) {
+			throw new InputException("Ban vui long nhap du lieu trong pham vi tu " + min + " den " + max);
+		}
+
+		return input;
+	}
+
 }

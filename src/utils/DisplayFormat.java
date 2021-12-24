@@ -1,35 +1,32 @@
 package utils;
 
 import java.text.MessageFormat;
-
+import java.util.Scanner;
 public class DisplayFormat {
-	private static int widthDisplay = 131;
+	public final static int widthDisplay = 131;
 
-	public static int getWidthDisplay() { return widthDisplay; }
-
+	/* 
+	 * in ra chữ nằm giữa hàng
+	 * ví dụ: ---------------------LeQuocThai------------------
+	 * */
     public static String inRaChuNamGiua(int length, String str, char c) {
         String charFormat = String.valueOf(c);
         int khoangCachHaiBen = (length - str.length()) / 2;
 
-		String strLeftAndRight = DisplayFormat.inRaHangCungKyTu(khoangCachHaiBen, c);
+		String strLeft = DisplayFormat.inRaHangCungKyTu(khoangCachHaiBen, c);
+		String strRight = strLeft;
 
-		String strCenter = str;
-		int lengthStr = str.length();
-		if(lengthStr % 2 == 0) {
-			strCenter = str.substring(0, lengthStr / 2) + "-" + str.substring(lengthStr / 2);
-		}
-		
-		lengthStr = strCenter.length();
-		if(strCenter.charAt(lengthStr / 2 + 1) == ' ') {
-			StringBuilder sb = new StringBuilder(strCenter);
-
-            sb.setCharAt(strCenter.length() / 2 + 1, '-');
-            strCenter = sb.toString();
+		if(strLeft.length() + strRight.length() + str.length() != length) {
+			strRight += c;
 		}
 
-		return String.format("%s%s%s", strLeftAndRight, strCenter, strLeftAndRight);
+		return String.format("%s%s%s", strLeft, str, strRight);
     }
 
+	/* 
+	 * in ra một hàng cùng kí tụ
+	 * ví dụ: ============================================
+	 * */
     public static String inRaHangCungKyTu(int length, char c) {
         String charFormat = String.valueOf(c); 
         String pattern = "%-{0}s";
@@ -37,11 +34,25 @@ public class DisplayFormat {
         return String.format(patternDisplay, charFormat).replaceAll(" ", charFormat);
     } 
 
+	/* 
+	 * in ra 1 hàng có chữ nằm ở cuối hàng và đầu hàng
+	 * ví dụ: |                               |
+	 * */
 	public static String inRaChuHaiBenHang(int length, char c) {
 		String charFormat = String.valueOf(c);
 		String pattern = "%s%{0}s%s";
 		String patternDisplay = MessageFormat.format(pattern, length - 2);
 		return String.format(patternDisplay, charFormat, " ", charFormat);
+	}
+
+	/**
+	 *	Hàm dừng chương trình đang thực thi và yêu cầu người
+	 *	dùng nhấn nút bất ký để tiếp tục chương trình
+	 * */
+	public static void dungChuongTrinh() {
+		Scanner ip = new Scanner(System.in);
+        System.out.println("Nhan nut bat ky de tiep tuc.");
+        ip.nextLine();	
 	}
 }
                         

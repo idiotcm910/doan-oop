@@ -1,7 +1,6 @@
 package utils;
 
 import lib.InputException;
-import java.util.Scanner;
 import lib.IHienThi;
 
 public class Display
@@ -25,10 +24,9 @@ public class Display
         System.out.flush();
     }
     
-    private void xuLyLoi(String x) {
-        System.out.println(x);
-        System.out.println("Nhan nut bat ky de tiep tuc!!!");
-        new Scanner(System.in).nextLine();
+    private void xuLyLoi(String msg) {
+        System.out.println(msg);
+		DisplayFormat.dungChuongTrinh();
     }
     
     public void setHeader(IHienThi dHeader) {
@@ -36,7 +34,8 @@ public class Display
     }
     
     public void hienThi(IHienThi hienThi) {
-		while(true) {
+		boolean reset = true;
+		while(reset) {
 	        try {
 	            this.xoaManHinh();
     	        if (this.dHeader != null) {
@@ -44,9 +43,12 @@ public class Display
             	}
             	hienThi.xuatTitle();
             	hienThi.xuat();
+
+				reset = false;
         	}
         	catch (InputException ex) {
             	this.xuLyLoi(ex.getMessage());
+				reset = true;
         	}
     	}
 	}

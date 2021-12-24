@@ -1,9 +1,9 @@
-package mode.menuproduct;
+package menu.menuproduct;
 
 import java.util.Scanner;
 
 import db.DataBase;
-import products.*;
+import components.products.*;
 import lib.IHienThi;
 import lib.InputException;
 import utils.Display;
@@ -19,7 +19,7 @@ public class DSuaProduct implements IHienThi {
 	
 	@Override
 	public void xuatTitle() {
-		System.out.println(DisplayFormat.inRaChuNamGiua(DisplayFormat.getWidthDisplay(), "CHINH SUA THONG TIN THUC AN NHANH", '='));
+		System.out.println(DisplayFormat.inRaChuNamGiua(DisplayFormat.widthDisplay, "CHINH SUA THONG TIN THUC AN NHANH", '='));
 		System.out.printf("\n\n");
 	}
 
@@ -38,10 +38,8 @@ public class DSuaProduct implements IHienThi {
 	}
 
 	private String nhapMaSanPhamCanChinhSua() {
-		Scanner ip = new Scanner(System.in);
-
 		System.out.print("Nhap ma san pham can chinh sua thong tin: ");
-		String input = Validation.nhapDulieu();
+		String input = Validation.nhapDuLieu(Product.gioiHanDoDaiMaSanPham);
 		return input;
 	}
 
@@ -59,7 +57,7 @@ public class DSuaProduct implements IHienThi {
 
 
 		while(true) {
-			System.out.println(DisplayFormat.inRaChuNamGiua(DisplayFormat.getWidthDisplay(), "NHAP THONG TIN MOI", '-'));
+			System.out.println(DisplayFormat.inRaChuNamGiua(DisplayFormat.widthDisplay, "NHAP THONG TIN MOI", '-'));
 
 			try {
 				sanPhamMoi.nhap();
@@ -71,19 +69,23 @@ public class DSuaProduct implements IHienThi {
 					throw new InputException("Ma san pham hoac ten san pham da co, vui long nhap lai du lieu!!!");
 				}
 
-				// nếu nhập thành công không có lỗi thì chèn dữ liệu mới vào và thoát vòng lặp
-				this.list.setElement(indexElement, sanPhamMoi);
-				dbFile.update(this.list.writeListDataInDatabase());
 				break;
 			}
 			catch(InputException ex) {
 				System.out.println(ex.getMessage());
 			}
 		}
+
+		// nếu nhập thành công không có lỗi thì chèn dữ liệu mới vào và thoát vòng lặp
+		this.list.setElement(indexElement, sanPhamMoi);
+		dbFile.update(this.list.writeListDataInDatabase());
 		
+		// Cập nhật lại các dữ liệu của sản phẩm mới bên file dữ liệu combo sản phẩm
+		DataBase dbFileCombo = new DataBase("comboproduct");
+		dbFileCombo.findAndUpdate(sanPhamCu.getTenSanPham(), sanPhamMoi.getTenSanPham());
+
 		System.out.println("Chinh sua thong tin thanh cong!!");
-		System.out.println("Nhap nut bat ky de quay tro lai");
-		(new Scanner(System.in)).nextLine();
+		DisplayFormat.dungChuongTrinh();
 		// tro ve menu
 		dp.hienThi(new DMenuProduct());
 	}
