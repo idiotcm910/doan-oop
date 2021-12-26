@@ -1,10 +1,6 @@
 package components.hoadon;
 
 import java.util.ArrayList;
-/**
- *
- * @author ACER
- */
 import java.util.StringTokenizer;
 
 import components.comboproducts.ComboProduct;
@@ -13,7 +9,6 @@ import components.products.ListProduct;
 import components.products.Product;
 import db.DataBase;
 
-import java.util.ArrayList;
 import lib.IFile;
 import lib.InputException;
 import utils.DateIn;
@@ -32,13 +27,50 @@ public HoaDon(){
     this.donGia = 0.0;
 }
 
-	public HoaDon(String maHoaDon, ArrayList<String> danhSachTenSanPham, ArrayList<Integer> soLuong, Double donGia) {
+	public HoaDon(String maHoaDon, ArrayList<String> danhSachTenHang, ArrayList<Integer> soLuong, Double donGia) {
 		this.maHoaDon = maHoaDon;
-		this.danhSachTenHang = danhSachTenSanPham;
+		this.danhSachTenHang = danhSachTenHang;
 		this.soLuong = soLuong;
 		this.donGia = donGia;
 		this.ngayNhapThongTin = DateIn.getCurrentDate();
 	}
+	public String getmaHoaDon(){
+            return maHoaDon;
+    }
+
+	public void setmaHoaDon(String maHoaDon){
+            this.maHoaDon=maHoaDon;
+     }
+        
+        public ArrayList<String> getdanhSachTenHang(){
+            return danhSachTenHang;
+        }
+        public void setdanhSachTenHang(ArrayList<String> danhSachTenHang){
+            this.danhSachTenHang=danhSachTenHang;
+        }
+        public ArrayList<Integer> getsoLuong(){
+            return soLuong;
+        }
+        public void setsoLuong(ArrayList<Integer> soLuong){
+            this.soLuong=soLuong;
+        }
+        
+        public String getngayNhapThongTin(){
+            return ngayNhapThongTin;
+            
+        }
+        
+        public void setngayNhapThongTin(String ngayNhapThongTin){
+            this.ngayNhapThongTin = ngayNhapThongTin;
+        }
+        
+        public Double getdonGia(){
+            return donGia;
+        }
+        
+        public void setdonGia(Double donGia){
+            this.donGia = donGia;
+        }
 
 public void nhap(){
     System.out.print("nhap ma hoa don: ");
@@ -46,7 +78,7 @@ public void nhap(){
 
 	int soLuongHang = 0;
 	System.out.print("nhap so luong hang: ");
-	soLuongHang = Validation.nhapDuLieuSo(0, 100);
+	soLuongHang = Validation.nhapDuLieuSo(1, 100);
 
 	DataBase dbFileProduct = new DataBase("product");
 	DataBase dbFileCombo = new DataBase("comboproduct");
@@ -82,7 +114,7 @@ public void nhap(){
 			}
 
 			System.out.print("Nhap so luong san pham thu " + (i + 1) + ": ");
-			int soLuongSanPham = Validation.nhapDuLieuSo(0, 100);
+			int soLuongSanPham = Validation.nhapDuLieuSo(1, 100);
 			this.soLuong.add(soLuongSanPham);
 			this.donGia += gia * soLuongSanPham;
 		}
@@ -95,6 +127,7 @@ public void nhap(){
     ngayNhapThongTin = DateIn.getCurrentDate();
 }
 public ArrayList<String> xuatMangThongTin(){
+
 	ArrayList<String> array = new ArrayList<String>();
 	array.add(this.maHoaDon);
 	String sanPhamVaSoLuong = "";
@@ -144,6 +177,9 @@ public ArrayList<String> xuatMangThongTin(){
 		if(this.ngayNhapThongTin.equals(str)) { return true; }
 		return false;
 	}
+        
+
+
 }	
     
 

@@ -85,4 +85,15 @@ public class Validation {
 		return input;
 	}
 
+    /**
+	 * Xử lý việc người dùng nhập ngày tháng năm có đúng dạng form dd/mm/yy hay không
+	 * @return 
+	 * */
+    public static String nhapNgayThangNam(){ 
+    	String input = Validation.nhapDuLieu();
+        if (!input.matches("([0-9]{2})/([0-9]{2})/([0-9]{4})")) {
+			throw new InputException("Ban vui long nhap du lieu theo form dd/mm/yy, vi du: 01/01/2001");
+        }
+        return input;
+    }
 }

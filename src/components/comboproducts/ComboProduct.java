@@ -78,7 +78,7 @@ public class ComboProduct implements IFile {
 	public void nhapThongTin() {
 		DataBase dbFile = new DataBase("product");
 
-		System.out.print("Nhap ma combo: ");
+		System.out.print("Nhap ma combo(toi da 4 ki tu): ");
 		this.maComboSanPham = Validation.nhapDuLieu(ComboProduct.gioihanDoDaiMaCombo);
 
 		System.out.print("Nhap ten combo: ");

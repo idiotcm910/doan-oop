@@ -82,7 +82,7 @@ public class ListProduct implements IListFile, IListElement {
 
    	@Override
    	public void xuatDanhSachThongTin() {
-		Integer[] arrayWidth = {8, 15, 30, 11, 21, 25, 21};
+		Integer[] arrayWidth = {10, 20, 40, 16, 21, 25, 26};
 		String[] arrayTitle = {"STT", "Ma san pham", "Ten San Pham", "gia", "hldd/dt", "Ngay nhap", "Loai san pham"};
 		
 		// tao bang

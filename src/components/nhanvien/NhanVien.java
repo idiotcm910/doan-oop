@@ -10,12 +10,12 @@ public class NhanVien extends ConNguoi implements IFile
     private String Ma;
     private String NgayVaoLam;
     private String Vitri;
-    private String Luong;
+    private int Luong;
     
     public NhanVien() {
     }
     
-    public NhanVien(String HoTen, String GioiTinh, String NgaySinh, String SoDienThoai, String CMND, String Ma, String NgayVaoLam, String Vitri, String Luong) {
+    public NhanVien(String HoTen, String GioiTinh, String NgaySinh, String SoDienThoai, String CMND, String Ma, String NgayVaoLam, String Vitri, int Luong) {
         super(HoTen, GioiTinh, NgaySinh, SoDienThoai, CMND);
         this.Ma = Ma;
         this.NgayVaoLam = NgayVaoLam;
@@ -47,11 +47,11 @@ public class NhanVien extends ConNguoi implements IFile
         this.Vitri = Vitri;
     }
     
-    public String getLuong() {
+    public int getLuong() {
         return this.Luong;
     }
     
-    public void setLuong(String Luong) {
+    public void setLuong(int Luong) {
         this.Luong = Luong;
     }
     
@@ -60,15 +60,15 @@ public class NhanVien extends ConNguoi implements IFile
         System.out.print("Nhap Ma: ");
 		this.Ma = Validation.nhapDuLieu(4);
         System.out.print("Nhap ngay vao lam: ");
-		this.NgayVaoLam = Validation.nhapDuLieu();
+		this.NgayVaoLam = Validation.nhapNgayThangNam();
         System.out.print("Nhap vi tri: ");
 		this.Vitri = Validation.nhapDuLieu();
         System.out.print("Nhap luong: ");
-		this.Luong = Validation.nhapDuLieu();
+		this.Luong = Validation.nhapDuLieuSo();
     }
     
     @Override
-	public ArrayList<String> xuatThongTin() {
+	public ArrayList<String> xuatMangThongTin() {
 		ArrayList<String> array = new ArrayList<String>();
 		array.add(this.HoTen);
 		array.add(this.GioiTinh);
@@ -78,7 +78,7 @@ public class NhanVien extends ConNguoi implements IFile
 		array.add(this.Ma);
 		array.add(this.NgayVaoLam);
 		array.add(this.Vitri);
-		array.add(this.Luong);
+		array.add(Integer.toString(this.Luong)+ "$");
 		return array;
 	}
     
@@ -93,7 +93,7 @@ public class NhanVien extends ConNguoi implements IFile
         this.Ma = sc.nextToken();
         this.NgayVaoLam = sc.nextToken();
         this.Vitri = sc.nextToken();
-        this.Luong = sc.nextToken();
+        this.Luong =Integer.parseInt(sc.nextToken());
     }
     
     @Override
@@ -102,13 +102,9 @@ public class NhanVien extends ConNguoi implements IFile
     }
     
     @Override
-    public boolean equals(Object o) {
-        NhanVien nv = (NhanVien)o;
-        return nv.getHoTen() == this.HoTen && nv.getGioiTinh() == this.GioiTinh && nv.getNgaySinh() == this.NgaySinh && nv.getCMND() == this.CMND && nv.getMa() == this.Ma && nv.getNgayVaoLam() == this.NgayVaoLam && nv.getVitri() == this.Vitri && nv.getLuong() == this.Luong;
-    }
-    
-    @Override
-    public boolean contains(String s) {
-        return this.HoTen.equals(s) || this.GioiTinh.equals(s) || this.NgaySinh.equals(s) || this.SoDienThoai.equals(s) || this.CMND.equals(s) || this.Ma.equals(s) || this.NgayVaoLam.equals(s) || this.Vitri.equals(s) || this.Luong.equals(s);
-    }
+    public boolean contains(String strProperty) {
+		if(this.Ma.equals(strProperty)) { return true; }
+		if(this.CMND.equals(strProperty)) { return true; }
+		return false;
+	}
 }

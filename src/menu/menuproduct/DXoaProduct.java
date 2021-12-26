@@ -35,7 +35,7 @@ public class DXoaProduct implements IHienThi {
 
     private void danhSachSanPham() {
         this.list.xuatDanhSachThongTin();
-		System.out.print("\n\n");
+		System.out.print("\n");
     }
 
     private String nhapMaSanPhamCanXoa() {

@@ -2,7 +2,6 @@ package components.products;
 
 import java.util.StringTokenizer;
 import java.util.ArrayList;
-import java.util.Scanner;
 import utils.Validation;
 
 public class Drinks extends Product 
@@ -29,9 +28,7 @@ public class Drinks extends Product
 
     public void nhap() {
         super.nhap();
-        Scanner ip = new Scanner(System.in);
-
-        System.out.print("Nhap dung tich: ");
+        System.out.print("Nhap dung tich(ml): ");
 		this.dungTich = Validation.nhapDuLieuSo(1, 500);
     }
    

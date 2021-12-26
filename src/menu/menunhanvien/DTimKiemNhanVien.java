@@ -34,11 +34,11 @@ public class DTimKiemNhanVien implements IHienThi {
     }
 
     private void xuLyTenNhanVien(String str) {
-		DataBase dbFileProduct = new DataBase("nhanvien");
+		DataBase fileNhanVien = new DataBase("nhanvien");
 		ArrayList<String> condition = new ArrayList<String>();
 		condition.add(str);
 		ListNhanVien danhSachTimKiem = new ListNhanVien();
-		danhSachTimKiem.readListDataInDatabase(dbFileProduct.findMany(condition));
+		danhSachTimKiem.readListDataInDatabase(fileNhanVien.findMany(condition));
 		if(danhSachTimKiem.isEmpty()) {
 			System.out.println("Khong tim thay nhan vien!!");
 		}

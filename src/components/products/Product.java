@@ -4,7 +4,6 @@ import utils.DateIn;
 import utils.Validation;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import lib.IFile;
 import lib.InputException;
@@ -34,7 +33,6 @@ abstract public class Product implements IFile
 	}
 
     public void nhap() {
-        Scanner ip = new Scanner(System.in);
         System.out.print("Nhap ma san pham: ");
 
         this.maSanPham = Validation.nhapDuLieu(Product.gioiHanDoDaiMaSanPham);

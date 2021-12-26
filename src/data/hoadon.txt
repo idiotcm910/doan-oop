@@ -1,0 +1,5 @@
+3233;1\Combo nhom B:1\Hamburger;40.7;2021/12/24|19:04:13
+5323;10\Com ga:10\Pesi:3\Hamburger:2\Combo nhom A;186.2;2021/12/24|22:51:01
+9844;10\Pizza:20\Coca cola:5\Hamburger:5\Sting:10\Com ga:5\Khoai tay chien;201.0;2021/12/24|22:55:19
+2213;2\Combo nhom A:5\Coca cola;88.5;2021/12/24|22:55:56
+3444;5\Combo nhom C:5\Coca cola:3\Pizza;341.5;2021/12/25|08:36:22

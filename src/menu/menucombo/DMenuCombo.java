@@ -52,7 +52,7 @@ public class DMenuCombo implements IHienThi {
 
 		// kiểm tra danh sách sản phẩm, nếu danh sách không có dữ liệu thi sẽ điều hướng trở về menu chính
 		DataBase dbFile = new DataBase("product");
-		if(dbFile.find().isEmpty()) {
+		if(dbFile.isDataEmpty()) {
 			System.out.println("Hien tai danh sach san pham dang trong, nen khong the nhap du lieu cho danh sach combo san pham!!");
 			isEmptyData = true;
 			menuDieuHuong = new DMenu();

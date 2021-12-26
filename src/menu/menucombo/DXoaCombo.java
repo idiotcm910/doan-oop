@@ -33,7 +33,7 @@ public class DXoaCombo implements IHienThi {
 
     private void danhSachComboSanPham() {
         this.danhSachCombo.xuatDanhSachThongTin();
-		System.out.print("\n\n");
+		System.out.print("\n");
     }
 
     private String nhapMaComboSanPham() {

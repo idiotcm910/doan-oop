@@ -1,1 +1,4 @@
-CB01;Combo nhom A;3\Com Suon:4\coca cola;20.3;3
+TRFT;Combo nhom A;5\Ga cay:3\Com ga;40.5;3
+EWDG;Combo nhom B;3\Ga ran:3\Khoai tay chien:2\Pesi;25.0;3
+WERF;Combo giang sinh;5\Ga cay:5\Khoai tay chien:3\Ga ran:5\Coca cola;100.0;5
+GDDD;Combo nhom C;3\Pizza:4\Khoai tay chien:3\Pesi;65.0;3

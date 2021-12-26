@@ -3,14 +3,13 @@ package utils;
 import java.text.MessageFormat;
 import java.util.Scanner;
 public class DisplayFormat {
-	public final static int widthDisplay = 131;
+	public final static int widthDisplay = 158;
 
 	/* 
 	 * in ra chữ nằm giữa hàng
-	 * ví dụ: ---------------------LeQuocThai------------------
+	 * ví dụ: ---------------------Son------------------
 	 * */
     public static String inRaChuNamGiua(int length, String str, char c) {
-        String charFormat = String.valueOf(c);
         int khoangCachHaiBen = (length - str.length()) / 2;
 
 		String strLeft = DisplayFormat.inRaHangCungKyTu(khoangCachHaiBen, c);

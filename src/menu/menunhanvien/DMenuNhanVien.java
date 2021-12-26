@@ -25,6 +25,13 @@ public class DMenuNhanVien implements IHienThi
     }
     
     public void xuat() {
+		if(this.listnv.isEmpty()) {
+			System.out.println("Chua co du lieu nhan vien, vui long them du lieu!!");
+			Display dp = Display.getInstance();
+			DisplayFormat.dungChuongTrinh();
+			dp.hienThi((IHienThi)new DThemNhanVien(this.listnv));
+			return;
+		}
         this.noiDungMenu();
         this.menu();
         int n = this.nhapLuaChon();
@@ -42,11 +49,12 @@ public class DMenuNhanVien implements IHienThi
     
     public void noiDungMenu() {
 		this.listnv.xuatDanhSachThongTin();
+		System.out.println("\n\n");
     }
     
     public int nhapLuaChon() {
         int n = 0;
-        System.out.println("Nhap lua chon: ");
+        System.out.print("Nhap lua chon: ");
 		n = Validation.nhapDuLieuSo();
         return n;
     }
@@ -63,11 +71,11 @@ public class DMenuNhanVien implements IHienThi
                 break;
             }
             case 3: {
-                dp.hienThi((IHienThi) new DSuaNhanVien(this.listnv));
+                dp.hienThi((IHienThi)new DSuaNhanVien(this.listnv));
                 break;
             }
             case 4: {
-				dp.hienThi((IHienThi) new DTimKiemNhanVien());
+				dp.hienThi((IHienThi)new DTimKiemNhanVien());
                 break;
             }
             case 5: {

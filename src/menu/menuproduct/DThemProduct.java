@@ -28,7 +28,7 @@ public class DThemProduct implements IHienThi {
 
 	private void danhSachSanPhamHienCo() {
 		this.danhSachSanPham.xuatDanhSachThongTin();
-		System.out.printf("\n\n");
+		System.out.printf("\n");
 	}
 
     private void nhapDanhSach() {

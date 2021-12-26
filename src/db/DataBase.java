@@ -201,4 +201,13 @@ public class DataBase {
 
 		return isSuccess;
    }
+
+   /**
+	* Hàm này sẽ kiểm tra file có trống dữ liệu không.
+	* @return true, nếu file trống dữ liệu
+	* */
+	public boolean isDataEmpty() {
+		ArrayList<String> collection = this.find();
+		return collection.isEmpty();
+	}
 }

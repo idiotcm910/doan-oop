@@ -1,135 +1,113 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package hoadon;
+package menu.menuhoadon;
 
+import components.hoadon.ListHoaDon;
 import db.DataBase;
-import java.util.Scanner;
 import lib.IHienThi;
 import lib.InputException;
-import hoadon.ListHoaDon;
-import mode.DMenu;
+import menu.DMenu;
 import utils.Display;
 import utils.DisplayFormat;
-import hoadon.DMenuHoaDon;
+import utils.Validation;
 
+public class DMenuHoaDon implements IHienThi{
+    public ListHoaDon listhd;
 
-/**
- *
- * @author ACER
- */
-
-public class DMenuHoaDon implements IHienThi {
-    private ListHoaDon listhd;
-    public DMenuHoaDon() {
-        listhd = new ListHoaDon();
-        DataBase dbFile = new DataBase("hoadon");
-        listhd.readListDataInDatabase(dbFile.find());
+public DMenuHoaDon() {
+        this.listhd = new ListHoaDon();
+        DataBase db = new DataBase("hoadon");
+        this.listhd.readListDataInDatabase(db.find());
     }
-    
-@Override
-    public void xuatTitle() {
-        System.out.println(DisplayFormat.inRaChuNamGiua(105, "DANH SACH HOA DON", '='));
-        System.out.printf("\n\n");
-    }
-    
-    
-    @Override
-    public void xuat() {
-        this.noidungmenu();
 
-        this.menu();
 
-        int choice = this.nhapluachon();
+public void xuatTitle(){
+    System.out.println(DisplayFormat.inRaChuNamGiua(DisplayFormat.widthDisplay, "MENU HOA DON", '='));
+    System.out.printf("\n");
+}
 
-        this.xulyluachon(choice);
-    }
-    
-    
-    private void noidungmenu() {
-		System.out.println(DisplayFormat.inRaHangCungKyTu(105, '='));
-	    System.out.printf("%-5s%-8s%-10s%-25s%-11s%-16s%-15s%5s\n",
-			" ", "maHoaDon", "maHang", "tenHang", "ngayNhapThongTin", "soLuong", "donGia", " ");
-		System.out.println(DisplayFormat.inRaHangCungKyTu(105, '='));
 
-        this.listhd.xuatDanhSachThongTin();
-		System.out.println(DisplayFormat.inRaHangCungKyTu(105, '='));
+public void xuat(){
+		Display dp = Display.getInstance();
+		DataBase dbFileProduct = new DataBase("product");
+		DataBase dbFileComboProduct = new DataBase("comboproduct");
+		if(dbFileProduct.isDataEmpty() || dbFileComboProduct.isDataEmpty()) {
+			System.out.println("Chua co du lieu san pham nen khong the them hoa don!!!");
+			DisplayFormat.dungChuongTrinh();
+			dp.hienThi((IHienThi)new DMenu());
+			return;
+		}
+		if(this.listhd.isEmpty()) {
+			System.out.println("Chua co du lieu hoa don vui long them du lieu!!");
+			DisplayFormat.dungChuongTrinh();
+			dp.hienThi((IHienThi)new DThemHoaDon(this.listhd));
+			return;
+		}
+		this.DanhSachHoaDon();
+		this.menuHoaDon();
+		int a = this.nhapLuaChon();
+		this. xuLyLuaChon(a);
+	}
+
+	private void DanhSachHoaDon(){
+    	listhd.xuatDanhSachThongTin();
+    	System.out.printf("\n\n");
+	}
+
+
+	private void menuHoaDon(){
+    	System.out.println("1. Them hoa don");
+    	System.out.println("2. Sua hoa don");
+    	System.out.println("3. Xoa hoa don");
+		System.out.println("4. Tim kiem hoa don");
+    	System.out.println("5. Quay lai menu chinh");
+    	System.out.println("0. Thoat chuong trinh");
+    	System.out.print("Nhap lua chon:");
+	}
+
+	private int nhapLuaChon() {
+        int a = 0;
+		a = Validation.nhapDuLieuSo();
+        return a;
     }
-    
-    
-    private void menu() {
-        System.out.printf("\n\n");
-        System.out.println("1. Them Hoa Don");
-        System.out.println("2. Sua Hoa Don");
-        System.out.println("3. Xoa Hoa Don");
-        System.out.println("4. Quay lai Menu san pham");
-        System.out.println("0. Thoat chuong trinh");
-        System.out.print("Nhap lua chon: ");
-    }
-    
-    
-    
-    private int nhapluachon() {
-        Scanner ip = new Scanner(System.in);
-        int choice = 0;
-        try {
-            choice = Integer.parseInt(ip.nextLine());
-        }
-        catch(Exception e) {
-            throw new InputException("Vui long nhap lua chon bang so!!!");
-        }
-        return choice;
-    }
-    
-    
-    private void xulyluachon(int choice) {
+
+	private void xuLyLuaChon(int n) {
         Display dp = Display.getInstance();
-		switch(choice) {
-			case 1:
-                dp.hienThi(new DThemHd(this.listhd));
-				break;
-            case 2:
-		dp.hienThi(new DSuaHd(this.listhd));
+        switch (n) {
+            case 1: {
+                dp.hienThi((IHienThi)new DThemHoaDon(this.listhd));
                 break;
-            case 3:
-                dp.hienThi(new DXoaHd(this.listhd));
+            }
+            case 2: {
+                dp.hienThi((IHienThi)new DSuaHoaDon(this.listhd));
                 break;
-                
-           case 4: {
+            }
+            case 3: {
+                dp.hienThi((IHienThi) new DXoaHoaDon(this.listhd));
+                break;
+            }
+            case 4: {
+				dp.hienThi((IHienThi)new DTimKiemHoaDon());
                 break;
             }
             case 5: {
                 dp.hienThi((IHienThi)new DMenu());
             }
-                
-			case 0:
-				// thoat chuong trinh
-				Runtime.getRuntime().exit(0);
-			default:
-				throw new InputException("Lua chon ban nhap khong dung, vui long nhap lai!!!");
-		}
+            case 0: {
+                Runtime.getRuntime().exit(0);
+                break;
+            }
+            default: {
+                throw new InputException("Lua chon ban nhap khong dung, vui long nhap lai!!!");
+            }
+        }
     }
 }
-
     
-        
-        
+
+
 
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+
+
+
 
 

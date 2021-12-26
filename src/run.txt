@@ -7,6 +7,8 @@
 ./components/products/Drinks.java
 ./components/comboproducts/ListComboProduct.java
 ./components/comboproducts/ComboProduct.java
+./components/hoadon/ListHoaDon.java
+./components/hoadon/HoaDon.java
 ./Main.java
 ./db/DataBase.java
 ./utils/Validation.java
@@ -25,6 +27,10 @@
 ./menu/menucombo/DXoaCombo.java
 ./menu/menucombo/DTimKiemCombo.java
 ./menu/menucombo/DSuaCombo.java
+./menu/menuhoadon/DMenuHoaDon.java
+./menu/menuhoadon/DThemHoaDon.java
+./menu/menuhoadon/DSuaHoaDon.java
+./menu/menuhoadon/DXoaHoaDon.java
 ./menu/AppHeader.java
 ./menu/menuproduct/DThemProduct.java
 ./menu/menuproduct/DSuaProduct.java

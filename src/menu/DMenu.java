@@ -8,6 +8,7 @@ import utils.Display;
 import java.util.Scanner;
 
 import menu.menucombo.DMenuCombo;
+import menu.menuhoadon.DMenuHoaDon;
 import menu.menuproduct.DMenuProduct;
 import menu.menunhanvien.DMenuNhanVien;
 
@@ -32,11 +33,11 @@ public class DMenu implements IHienThi
         System.out.println("1. Xem danh sach san pham hien co trong cua hang");
 		System.out.println("2. Xem danh sach combo san pham hien co trong cua hang");
 		System.out.println("3. Xem danh sach nhan vien dang lam viec trong cua hang");
+		System.out.println("4. Xem danh sach hoa don trong cua hang");
         System.out.println("0. Thoat");
     }
     
     private int nhapLuaChon() {
-        Scanner ip = new Scanner(System.in);
         System.out.print("Nhap lua chon: ");
 
         int choice;
@@ -58,6 +59,9 @@ public class DMenu implements IHienThi
 				break;
 			case 3:
 				iHT = (IHienThi)new DMenuNhanVien();
+				break;
+			case 4:
+				iHT = (IHienThi)new DMenuHoaDon();
 				break;
             case 0: 
                 Runtime.getRuntime().exit(0);

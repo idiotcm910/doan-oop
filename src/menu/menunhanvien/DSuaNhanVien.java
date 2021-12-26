@@ -30,6 +30,7 @@ public class DSuaNhanVien implements IHienThi {
     
     public void danhsachnhanvien() {
 		this.listnv.xuatDanhSachThongTin();
+		System.out.printf("\n");
     }
     
     public void suanhanvien() {

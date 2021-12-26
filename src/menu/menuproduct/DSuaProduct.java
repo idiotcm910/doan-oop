@@ -34,7 +34,7 @@ public class DSuaProduct implements IHienThi {
 	
 	private void inDanhSachSanPham() {
         this.list.xuatDanhSachThongTin();
-		System.out.printf("\n\n");
+		System.out.printf("\n");
 	}
 
 	private String nhapMaSanPhamCanChinhSua() {

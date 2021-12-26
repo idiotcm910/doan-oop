@@ -43,7 +43,7 @@ public class ListComboProduct implements IListFile, IListElement {
 		n = Validation.nhapDuLieuSo(1, 10);	
 
         for(int i = 1; i <= n; ++i) {
-            System.out.println(DisplayFormat.inRaChuNamGiua(DisplayFormat.widthDisplay, "Nhap thong tin combo thu " + i, '='));
+            System.out.println(DisplayFormat.inRaChuNamGiua(DisplayFormat.widthDisplay / 2, "Nhap thong tin combo thu " + i, '='));
 			ComboProduct comboMoi = new ComboProduct();
 			try {
 				comboMoi.nhapThongTin();
@@ -67,7 +67,7 @@ public class ListComboProduct implements IListFile, IListElement {
 
    	@Override
    	public void xuatDanhSachThongTin() {
-		Integer[] arrayWidth = {6, 15, 25, 55, 11, 19};	
+		Integer[] arrayWidth = {10, 20, 25, 65, 14, 24};	
 		String[] arrayTitle = {"STT", "Ma combo", "Ten combo", "Danh sach san pham", "Gia", "So nguoi dung"};	
 
 		// tao bang

@@ -23,7 +23,8 @@ public class DThemNhanVien implements IHienThi
     @Override
     public void xuat() {
 		this.listnv.xuatDanhSachThongTin();
-
+		System.out.println("\n");
+		this.nhapDanhSach();
     }
     
     

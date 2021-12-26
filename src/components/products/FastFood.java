@@ -1,7 +1,6 @@
 package components.products;
 
 import java.util.StringTokenizer;
-import java.util.Scanner;
 import java.util.ArrayList;
 import utils.Validation;
 
@@ -21,9 +20,8 @@ public class FastFood extends Product
 
     public void nhap() {
         super.nhap();
-        Scanner ip = new Scanner(System.in);
 
-        System.out.print("Nhap ham luong dinh duong: ");
+        System.out.print("Nhap ham luong dinh duong(kcal): ");
 		this.hamLuongDinhDuong = Validation.nhapDuLieuSo(1, 500);
     }
     
@@ -52,7 +50,7 @@ public class FastFood extends Product
 		data.add(this.maSanPham);
 		data.add(this.tenSanPham);
 		data.add(this.giaSanPham.toString() + "$");
-		data.add(this.hamLuongDinhDuong.toString() + "kl");
+		data.add(this.hamLuongDinhDuong.toString() + "kcal");
 		data.add(this.ngayNhapThongTin);
 
 		return data;

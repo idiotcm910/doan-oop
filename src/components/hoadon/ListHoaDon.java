@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package components.hoadon;
 
 import java.util.ArrayList;
@@ -11,10 +7,15 @@ import lib.IListFile;
 import lib.IListElement;
 import utils.DisplayFormat;
 import utils.TableConsole;
-
+import lib.InputException;
+import utils.Validation;
  public class ListHoaDon implements IListElement, IListFile {
 
-	private ArrayList<HoaDon> listHoaDon = new ArrayList<HoaDon>();
+	private ArrayList<HoaDon> listHoaDon;
+
+	public ListHoaDon() {
+		this.listHoaDon = new ArrayList<HoaDon>();
+	}
         
     public boolean addElement(Object obj) {
 		HoaDon hd = (HoaDon)obj;
@@ -40,15 +41,42 @@ import utils.TableConsole;
 			}
 			return false;
         }
+
+	@Override
+	public void nhapDanhSachThongTin() {
+	    System.out.print("Nhap so luong hoa don can them: ");
+        int a = Validation.nhapDuLieuSo(1, 100);
+
+		for (int i = 1; i <= a; ++i) {
+			try {
+	            HoaDon hd = new HoaDon();
+		      	System.out.println(DisplayFormat.inRaChuNamGiua(DisplayFormat.widthDisplay / 2, "Nhap thong tin hoa don thu " + i, '='));
+            	hd.nhap();
+            
+	            boolean isEqualsmaHoaDon = this.contains(hd.getmaHoaDon());
+            
+    	        if(isEqualsmaHoaDon) {
+						throw new InputException("Ma hoa don da co, vui long nhap lai du lieu!!!");
+				}
+            	this.addElement(hd);
+			}
+			catch(InputException ex) {
+				System.out.println(ex.getMessage());
+				i -= 1;
+			}
+        }
+	}
         
     @Override
    	public void xuatDanhSachThongTin() {
-		Integer[] arrayWidth = {6, 15, 75, 11, 24};
+		Integer[] arrayWidth = {8, 15, 100, 11, 24};
 		String[] arrayTitle = {"STT", "Ma hoa don", "Danh sach san pham", "Gia", "Ngay nhap thong tin"};
+		// tao bang
 		ArrayList<Integer> arrayWidthColumns = new ArrayList<Integer>(Arrays.asList(arrayWidth));
 		ArrayList<String> arrayTitleColumns = new ArrayList<String>(Arrays.asList(arrayTitle));
 		TableConsole table = new TableConsole(arrayWidthColumns);
 		table.setTitle(arrayTitleColumns);
+		// them hang du lieu vao bang
 		for(int i = 0; i < this.listHoaDon.size(); ++i) {
 			HoaDon hd = this.listHoaDon.get(i);
 			ArrayList<String> hangDuLieu = new ArrayList<String>();
@@ -56,6 +84,7 @@ import utils.TableConsole;
 			hangDuLieu.addAll(hd.xuatMangThongTin());
 			table.addRowData(hangDuLieu);
 		}
+		// in ra bang du lieu trong console
 		System.out.println(DisplayFormat.inRaChuNamGiua(DisplayFormat.widthDisplay, "DANH SACH HOA DON", '-'));
 		table.DrawTable();	
    	}

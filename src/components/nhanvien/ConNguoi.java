@@ -1,7 +1,6 @@
 package components.nhanvien; 
 
 import java.util.ArrayList;
-import java.util.Scanner;
 import utils.Validation; 
 abstract class ConNguoi
 {
@@ -68,14 +67,14 @@ abstract class ConNguoi
         System.out.print("Nhap gioi tinh: ");
         this.GioiTinh = Validation.nhapDuLieu();
         System.out.print("Nhap ngay sinh: ");
-        this.NgaySinh = Validation.nhapDuLieu();
+        this.NgaySinh = Validation.nhapNgayThangNam();
         System.out.print("Nhap so dien thoai: ");
-        this.SoDienThoai = Validation.nhapDuLieu();
+        this.SoDienThoai = Validation.nhapDuLieu(10);
         System.out.print("Nhap so chung minh nhan dan: ");
-        this.CMND = Validation.nhapDuLieu();
+        this.CMND = Validation.nhapDuLieu(9);
     }
     
-    abstract ArrayList<String> xuatThongTin(); 
+    abstract ArrayList<String> xuatMangThongTin(); 
     
     abstract boolean contains(String strProperty);
 }
